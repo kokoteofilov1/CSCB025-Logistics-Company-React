@@ -7,3 +7,11 @@ export const signUp = (body) => {
 		},
 	});
 };
+
+export const signIn = (body) => {
+    return axios.post("/api/signin", body, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+};

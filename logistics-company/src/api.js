@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+let domain = 'http://localhost:8080/api';
+
 export const signUp = (body) => {
-	return axios.post('/api/SignUp', body, {
+	return axios.post(`${domain}/auth/signup`, body, {
 		headers: {
 			'Content-Type': 'application/json',
 		},
@@ -9,9 +11,9 @@ export const signUp = (body) => {
 };
 
 export const signIn = (body) => {
-    return axios.post("/api/signin", body, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+	return axios.post(`${domain}/auth/signin`, body, {
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 };

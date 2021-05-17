@@ -26,8 +26,8 @@ function SignUp() {
 
 		try {
 			const body = JSON.stringify({
-				firstName: formFields.firstName,
-				lastName: formFields.lastName,
+				//firstName: formFields.firstName,
+				//lastName: formFields.lastName,
 				username: formFields.username,
 				email: formFields.email,
 				password: formFields.password,

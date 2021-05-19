@@ -43,6 +43,7 @@ function AddOffice() {
 					<div class="shadow overflow-hidden sm:rounded-md">
 						<div class="px-4 py-5 bg-white sm:p-6">
 							<div class="grid grid-cols-6 gap-6">
+
 								<div class="col-span-6 sm:col-span-3">
 									<label for="officeName" class="block text-sm font-medium text-gray-700">
 										Office name
@@ -52,7 +53,7 @@ function AddOffice() {
 										name="officeName"
 										id="officeName"
 										autocomplete="office-name"
-										class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										onChange={changeFormValues}
 									/>
 								</div>
@@ -66,12 +67,12 @@ function AddOffice() {
 										name="phoneNumber"
 										id="phoneNumber"
 										autocomplete="phone-number"
-										class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										onChange={changeFormValues}
 									/>
 								</div>
 
-								<div class="col-span-6 sm:col-span-4">
+								<div class="col-span-6 sm:col-span-6">
 									<label for="emailAddress" class="block text-sm font-medium text-gray-700">
 										Email address
 									</label>
@@ -80,7 +81,7 @@ function AddOffice() {
 										name="emailAddress"
 										id="emailAddress"
 										autocomplete="email"
-										class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										onChange={changeFormValues}
 									/>
 								</div>
@@ -99,6 +100,46 @@ function AddOffice() {
 									</select>
 								</div>
 
+								<div class="col-span-6 sm:col-span-6 lg:col-span-3">
+									<label for="city" class="block text-sm font-medium text-gray-700">
+										City
+									</label>
+									<input
+										type="text"
+										name="city"
+										id="city"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										onChange={changeFormValues}
+									/>
+								</div>
+
+								<div class="col-span-6 sm:col-span-3 lg:col-span-3">
+									<label for="state" class="block text-sm font-medium text-gray-700">
+										State / Province
+									</label>
+									<input
+										type="text"
+										name="state"
+										id="state"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										onChange={changeFormValues}
+									/>
+								</div>
+
+								<div class="col-span-6 sm:col-span-3 lg:col-span-3">
+									<label for="postalCode" class="block text-sm font-medium text-gray-700">
+										ZIP / Postal
+									</label>
+									<input
+										type="text"
+										name="postalCode"
+										id="postalCode"
+										autocomplete="postal-code"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										onChange={changeFormValues}
+									/>
+								</div>
+								
 								<div class="col-span-6">
 									<label for="streetAddress" class="block text-sm font-medium text-gray-700">
 										Street address
@@ -108,57 +149,19 @@ function AddOffice() {
 										name="streetAddress"
 										id="streetAddress"
 										autocomplete="street-address"
-										class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										onChange={changeFormValues}
 									/>
 								</div>
-
-								<div class="col-span-6 sm:col-span-6 lg:col-span-2">
-									<label for="city" class="block text-sm font-medium text-gray-700">
-										City
-									</label>
-									<input
-										type="text"
-										name="city"
-										id="city"
-										class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-										onChange={changeFormValues}
-									/>
-								</div>
-
-								<div class="col-span-6 sm:col-span-3 lg:col-span-2">
-									<label for="state" class="block text-sm font-medium text-gray-700">
-										State / Province
-									</label>
-									<input
-										type="text"
-										name="state"
-										id="state"
-										class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-										onChange={changeFormValues}
-									/>
-								</div>
-
-								<div class="col-span-6 sm:col-span-3 lg:col-span-2">
-									<label for="postalCode" class="block text-sm font-medium text-gray-700">
-										ZIP / Postal
-									</label>
-									<input
-										type="text"
-										name="postalCode"
-										id="postalCode"
-										autocomplete="postal-code"
-										class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-										onChange={changeFormValues}
-									/>
-								</div>
+								
 							</div>
 						</div>
+						
 						<div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
 							<button
 								type="submit"
 								class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-								Save
+								Create Office
 							</button>
 						</div>
 					</div>

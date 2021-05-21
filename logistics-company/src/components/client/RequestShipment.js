@@ -4,7 +4,9 @@ function RequestShipment() {
     const formFieldsInitalState = {
         recipientFirstName: '',
         recipientLastName: '',
+        option: '',
         address: '',
+        office: '',
         packageWeight: '',
         phoneNumber: ''
     }
@@ -33,6 +35,35 @@ function RequestShipment() {
             console.log(error);
         }
     };
+
+    let addressField = 
+    <div class="col-span-6">
+        <label for="address" class="block text-sm font-medium text-gray-700">
+            Address
+        </label>
+        <input 
+            value={formFields.address} 
+            onChange={formValues} 
+            type="email" 
+            name="email" 
+            id="email" 
+            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+    </div>
+
+    let officesDropdown = 
+    <div class="col-span-6">
+        <label for="office" class="block text-sm font-medium text-gray-700">
+            Choose an office for your delivery
+        </label>
+        <select 
+            onChange={formValues} 
+            id="office" 
+            name="office" 
+            class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option hidden>Choose an office</option>
+                <option>All offices will be displayed here</option>
+        </select>
+    </div>
 
     return (
         <div class="mt-10 sm:mt-0" >
@@ -83,13 +114,13 @@ function RequestShipment() {
                                 </div>
 
                                 <div class="col-span-6">
-                                    <label for="position" class="block text-sm font-medium text-gray-700">
+                                    <label for="option" class="block text-sm font-medium text-gray-700">
                                         Select a shipment option
                                     </label>
                                     <select 
                                     onChange={formValues} 
-                                    id="position" 
-                                    name="position" 
+                                    id="option" 
+                                    name="option" 
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option hidden>shipment options</option>
                                         <option>to an office</option>
@@ -97,18 +128,8 @@ function RequestShipment() {
                                     </select>
                                 </div>
 
-                                <div class="col-span-6">
-                                    <label for="address" class="block text-sm font-medium text-gray-700">
-                                        Address
-                                    </label>
-                                    <input 
-                                    value={formFields.address} 
-                                    onChange={formValues} 
-                                    type="email" 
-                                    name="email" 
-                                    id="email" 
-                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                </div>
+                                {formFields.option === "to an address" && addressField}
+                                {formFields.option === "to an office" && officesDropdown}
 
                                 <div class="col-span-6">
                                     <label for="phomeNumber" class="block text-sm font-medium text-gray-700">

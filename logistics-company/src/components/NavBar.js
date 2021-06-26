@@ -48,7 +48,10 @@ function NavBar() {
 							<button
 								onClick={() => {
 									localStorage.removeItem('accessToken');
+<<<<<<< HEAD
 									console.log(localStorage);
+=======
+>>>>>>> main
 									history.push('/SignIn');
 								}}
 								className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:text-white hover:bg-gray-700">

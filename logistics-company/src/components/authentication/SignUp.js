@@ -35,7 +35,7 @@ function SignUp() {
 
 			await signUp(body);
 
-			history.push('/');
+			history.push('/SignIn');
 		} catch (error) {
 			console.log(error);
 		}

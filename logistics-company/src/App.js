@@ -22,9 +22,9 @@ function App() {
 			<Switch>
 				<AuthContext.Provider value={isAuthenticated}>
 					<Route path={'/SignUp'} component={SignUp} />
-					<Route exact path={'/'} component={SignIn} />
+					<Route path={'/SignIn'} component={SignIn} />
 					<Route path={'/AddOffice'} component={AddOffice} />
-					<Route path={'/Home'} component={Home} />
+					<Route path={'/'} component={Home} />
 					<Route path={'/RequestShipment'} component={RequestShipment} /> 
 				</AuthContext.Provider>
 			</Switch>

@@ -18,8 +18,9 @@ export const signIn = (body) => {
 			},
 		})
 		.then((response) => {
+			console.log(response.data)
 			let token = response.data.accessToken;
-			localStorage.setItem('accessToken', 'Bearer ' + token);
+			localStorage.setItem('accessToken', token);
 			axios.defaults.headers.common['Authorization'] = localStorage.getItem('acessToken');
 			console.log(localStorage.getItem('accessToken'));
 		});
@@ -29,7 +30,7 @@ export const addOffice = (body) => {
 	return axios.post(`${domain}/office`, body, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': localStorage.getItem('accessToken'),
+			'Authorization': 'Bearer' + localStorage.getItem('accessToken'),
 		},
 	});
 };

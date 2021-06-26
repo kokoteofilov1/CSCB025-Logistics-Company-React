@@ -29,8 +29,7 @@ function SignIn() {
 			});
 
 			await signIn(body);
-			history.push('/SignUp');
-			// setAuthStatus(true);
+			history.push('/');
 		} catch (error) {
 			console.log(error);
 		}

@@ -46,9 +46,13 @@ function NavBar() {
 						</div>
 						<div>
 							<button
-								onClick={() => history.push('/')}
+								onClick={() => {
+									localStorage.removeItem('accessToken');
+									console.log(localStorage);
+									history.push('/SignIn');
+								}}
 								className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:text-white hover:bg-gray-700">
-								{isAuthenticated === null ? '' : isAuthenticated ? 'Switch Account' : 'Sign In'}
+								{'Switch Account'}
 							</button>
 						</div>
 					</div>

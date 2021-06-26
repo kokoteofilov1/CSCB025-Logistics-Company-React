@@ -12,7 +12,7 @@ function NavBar() {
 		return (
 			<Link
 				to={'/AdminPanel'}
-				className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+				className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:text-white hover:bg-gray-700">
 				Admin Panel
 			</Link>
 		);
@@ -30,17 +30,21 @@ function NavBar() {
 										LogisticsAPP
 									</p>
 									<Link
+										to={'/'}
+										className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:text-white hover:bg-gray-700">
+										Home
+									</Link>
+									<Link
 										to={'/RequestShipment'}
 										className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:text-white hover:bg-gray-700">
 										Request Shipment
 									</Link>
 									<Link
-										to={'/ShipmentHistory'}
-										className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-										Shipment History
+										to={'/EditProfile'}
+										className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:text-white hover:bg-gray-700">
+										EditProfile
 									</Link>
-
-									{/* {isAdmin ? AdminPanelButton() : null} */}
+									{localStorage.getItem('roles').includes("ROLE_ADMIN") ? AdminPanelButton() : null}
 								</div>
 							</div>
 						</div>
@@ -48,10 +52,10 @@ function NavBar() {
 							<button
 								onClick={() => {
 									localStorage.removeItem('accessToken');
-<<<<<<< HEAD
-									console.log(localStorage);
-=======
->>>>>>> main
+									localStorage.removeItem('userEmail');
+									localStorage.removeItem('username');
+									localStorage.removeItem('roles');
+									localStorage.removeItem('id');
 									history.push('/SignIn');
 								}}
 								className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:text-white hover:bg-gray-700">

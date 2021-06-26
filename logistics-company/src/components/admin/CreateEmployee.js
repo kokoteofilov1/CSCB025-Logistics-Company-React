@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from "react";
+import { addEmployee } from "../../api";
 
 function CreateEmployee() {
     const formFieldsInitalState = {
@@ -25,6 +26,8 @@ function CreateEmployee() {
             const body = JSON.stringify({
                 ...formFields
             });
+
+            await addEmployee(body);
 
             console.log(body);
 

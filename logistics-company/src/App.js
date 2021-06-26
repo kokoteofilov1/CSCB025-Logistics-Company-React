@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignUp from './components/authentication/SignUp';
 import SignIn from './components/authentication/SignIn.js';
 import AddOffice from './components/admin/AddOffice';
+import AdminPanel from './components/admin/AdminPanel';
 import Home from './components/homePages/Home';
 import { AuthContext } from './AuthContext';
 import RequestShipment from './components/client/RequestShipment';
+import EditProfile from './components/client/EditProfile';
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -24,8 +26,10 @@ function App() {
 					<Route path={'/SignUp'} component={SignUp} />
 					<Route path={'/SignIn'} component={SignIn} />
 					<Route path={'/AddOffice'} component={AddOffice} />
-					<Route path={'/'} component={Home} />
+					<Route path={'/AdminPanel'} component={AdminPanel} />
+					<Route exact path={'/'} component={Home} />
 					<Route path={'/RequestShipment'} component={RequestShipment} /> 
+					<Route path={'/EditProfile'} component={EditProfile} /> 
 				</AuthContext.Provider>
 			</Switch>
 		</Router>

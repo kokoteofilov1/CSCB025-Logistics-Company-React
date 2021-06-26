@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { addOffice } from "../../api";
 
 function AddOffice() {
 	const [formFields, setFormFields] = useState({
@@ -30,7 +31,7 @@ function AddOffice() {
 				...formFields,
 			});
 
-			//TODO: submit to backend
+			addOffice(body);
 		} catch (error) {
 			console.log(error);
 		}

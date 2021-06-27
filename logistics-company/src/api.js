@@ -39,16 +39,6 @@ export const getCompanies = () => {
 	});
 };
 
-export const getOffices = () => {
-	return axios.get(`${domain}/office`, {
-		headers: {
-			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	});
-};
-
-
 export const addOffice = (body) => {
 	return axios.post(`${domain}/office`, body, {
 		headers: {
@@ -57,6 +47,24 @@ export const addOffice = (body) => {
 		}
 	});
 };
+
+export const getOffices = () => {
+	return axios.get(`${domain}/office`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+}
+
+export const deleteOffice = (body) => {
+	return axios.delete(`${domain}/office/${body.id}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+}
 
 export const addEmployee = (body) => {
 	return axios.post(`${domain}/user`, body, {
@@ -82,5 +90,5 @@ export const editUser = (body) => {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
 		}
-	});
+	})
 };

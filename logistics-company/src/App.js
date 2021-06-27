@@ -9,6 +9,7 @@ import Home from './components/homePages/Home';
 import { AuthContext } from './AuthContext';
 import RequestShipment from './components/client/RequestShipment';
 import EditProfile from './components/client/EditProfile';
+import DisplayOffices from './components/admin/DisplayOffices';
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -30,6 +31,7 @@ function App() {
 					<Route exact path={'/'} component={Home} />
 					<Route path={'/RequestShipment'} component={RequestShipment} /> 
 					<Route path={'/EditProfile'} component={EditProfile} /> 
+					<Route path={'/DisplayOffices'} component={DisplayOffices} />
 				</AuthContext.Provider>
 			</Switch>
 		</Router>

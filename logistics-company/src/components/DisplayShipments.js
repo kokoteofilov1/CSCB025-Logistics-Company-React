@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Navigation from '../NavBar';
+import { Link } from 'react-router-dom';	
 
-import { getOffices, deleteOffice } from '../../api';
+import { getShipments, getUser, deleteOffice } from '../api';
 
-function DisplayOffice() {
-	const [offices, setOffices] = useState([]);
+function DisplayShipments() {
+	const [shipments, setShipments] = useState([]);
 
 	useEffect(() => {
 		const getItems = async () => {
-			const items = await getOffices();
-			setOffices(items.data);
+			const items = await getShipments();
+			setShipments(items.data);
+			console.log(items.data);
 		};
 		getItems();
 	}, []);
 
-	const handleDelete = async (office) => {
-		await deleteOffice(office);	
-		setOffices(offices.filter((item) => item._id !== office._id));
+	const getUsernameFromId = async (id) => {
+		const user = await getUser(id);
+		console.log(user.data)
+		return user.data.username
+	}
+
+	const handleDelete = async (shipment) => {
+		await deleteOffice(shipment);	
+		setShipments(shipments.filter((item) => item._id !== shipment._id));
 	};
 
 	return (
@@ -31,17 +37,12 @@ function DisplayOffice() {
 										<th
 											scope="col"
 											className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-											Office ID
+											Sender
 										</th>
 										<th
 											scope="col"
 											className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-											Country
-										</th>
-										<th
-											scope="col"
-											className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-											City
+											Receiver
 										</th>
 										<th
 											scope="col"
@@ -51,12 +52,7 @@ function DisplayOffice() {
 										<th
 											scope="col"
 											className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-											Phone number
-										</th>
-										<th
-											scope="col"
-											className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-											Email address
+											Weight
 										</th>
 										<th scope="col" className="px-6 py-3 bg-gray-50">
 											<span className="sr-only">Edit</span>
@@ -67,31 +63,29 @@ function DisplayOffice() {
 									</tr>
 								</thead>
 								<tbody className="bg-white divide-y divide-gray-200">
-									{offices.map((office) => (
-										<tr key={office._id}>
+									{shipments.map((shipment) => (
+										<tr key={shipment._id}>
 											<td className="px-6 py-4 whitespace-nowrap">
-												<div className="text-sm text-gray-900">{office.id}</div>
+												<div className="text-sm text-gray-900">
+													{/* {getUsernameFromId(shipment.sender)} */}
+												</div>
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap">
-												<div className="text-sm text-gray-900">Bulgaria</div>
+												<div className="text-sm text-gray-900">
+													{/* {getUsernameFromId(shipment.receiver)} */}
+												</div>
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap">
-												<div className="text-sm text-gray-900">{office.city}</div>
+												<div className="text-sm text-gray-900"></div>
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap">
-												<div className="text-sm text-gray-900">{office.address}</div>
-											</td>
-											<td className="px-6 py-4 whitespace-nowrap">
-												<div className="text-sm text-gray-900">* No phone number available. *</div>
-											</td>
-											<td className="px-6 py-4 whitespace-nowrap">
-												<div className="text-sm text-gray-900">* No email-address available. *</div>
+												<div className="text-sm text-gray-900"></div>
 											</td>
 											<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 												<Link
 													to={{
 														pathname: '/Edit',
-														state: { _id: office._id, title: office.title },
+														state: { _id: shipment._id, title: shipment.title },
 													}}>
 													Edit
 												</Link>
@@ -99,7 +93,7 @@ function DisplayOffice() {
 											<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 												<button
 													onClick={() => {
-														handleDelete(office);
+														handleDelete(shipment);
 													}}>
 													Delete
 												</button>
@@ -115,4 +109,4 @@ function DisplayOffice() {
 	);
 }
 
-export default DisplayOffice;
+export default DisplayShipments;

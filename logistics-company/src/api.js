@@ -84,6 +84,15 @@ export const addCompany = (body) => {
 	});
 };
 
+export const getUser = (id) => {
+	return axios.get(`${domain}/user/${id}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+}
+
 export const editUser = (body) => {
 	return axios.put(`${domain}/user/${localStorage.getItem('id')}`, body, {
 		headers:{
@@ -92,3 +101,12 @@ export const editUser = (body) => {
 		}
 	})
 };
+
+export const getShipments = () => {
+	return axios.get(`${domain}/shipment`, {
+		headers:{
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+}

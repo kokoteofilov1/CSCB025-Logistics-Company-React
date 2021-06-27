@@ -39,6 +39,24 @@ export const getCompanies = () => {
 	});
 };
 
+export const getOffices = () => {
+	return axios.get(`${domain}/office`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+};
+
+export const getUsers = () => {
+	return axios.get(`${domain}/user`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+}
+
 export const addOffice = (body) => {
 	return axios.post(`${domain}/office`, body, {
 		headers: {
@@ -48,17 +66,17 @@ export const addOffice = (body) => {
 	});
 };
 
-export const getOffices = () => {
-	return axios.get(`${domain}/office`, {
+export const deleteOffice = (body) => {
+	return axios.delete(`${domain}/office/${body.id}`, {
 		headers: {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
 		}
 	})
-}
+};
 
-export const deleteOffice = (body) => {
-	return axios.delete(`${domain}/office/${body.id}`, {
+export const deleteUser = (body) => {
+	return axios.delete(`${domain}/user/${body.id}`, {
 		headers: {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')

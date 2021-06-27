@@ -5,7 +5,7 @@ import SignUp from './components/authentication/SignUp';
 import SignIn from './components/authentication/SignIn.js';
 import AddOffice from './components/admin/AddOffice';
 import AdminPanel from './components/admin/AdminPanel';
-import Home from './components/homePages/Home';
+import Home from './components/Home';
 import { AuthContext } from './AuthContext';
 import RequestShipment from './components/client/RequestShipment';
 import EditProfile from './components/client/EditProfile';

@@ -5,6 +5,7 @@ import CreateEmployee from './CreateEmployee';
 import AddOffice from './AddOffice';
 import AddCompany from './AddCompany';
 import DisplayOffices from './DisplayOffices'
+import DisplayUsers from './DisplayUsers'
 import DisplayShipments from '../DisplayShipments';
 
 function AdminPanel() {
@@ -34,6 +35,10 @@ function AdminPanel() {
                 <button onClick={() => setComp(<DisplayShipments />)} className="inline-flex items-center justify-center px-5 py-3 border border-1px text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 mx-4">
                     Display Shipments
                 </button>
+                <button onClick={() => setComp(<DisplayUsers />)} className="inline-flex items-center justify-center px-5 py-3 border border-1px text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 mx-4">
+                    Display Users
+                </button>
+
             </div>
 
             <div className="flex justify-center my-10">

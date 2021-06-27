@@ -1,18 +1,36 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addOffice } from "../../api";
+import { getCompanies } from "../../api";
 
 function AddOffice() {
+	const [companies, setCompanies] = useState([]);
+
 	const [formFields, setFormFields] = useState({
 		officeName: '',
 		phoneNumber: '',
-		emailAddress: '',
+		email: '',
 		country: '',
-		streetAddress: '',
 		city: '',
-		state: '',
-		postalCode: '',
+		address: '',
+		company: ''
 	});
+
+	useEffect(() => {
+        const getAllCompanies = async() => {
+			const res = await getCompanies();
+			setCompanies(res.data);
+			console.log(res.data)
+		}
+		getAllCompanies();
+    }, []);
+
+	const allCompanies = companies.length > 0 && companies.map((company) => {
+        return (
+            <option>{company.name}</option>
+        );
+    });
+
 
 	const changeFormValues = (event) => {
 		setFormFields({
@@ -27,10 +45,15 @@ function AddOffice() {
 		event.preventDefault();
 
 		try {
+			const companyObject = companies.find(obj => obj.name === formFields.company);
+			console.log(companyObject);
+
 			const body = JSON.stringify({
 				...formFields,
+				company: {id: companyObject.id, name: companyObject.name}
 			});
 
+			console.log(body);
 			addOffice(body);
 		} catch (error) {
 			console.log(error);
@@ -74,13 +97,13 @@ function AddOffice() {
 								</div>
 
 								<div class="col-span-6 sm:col-span-6">
-									<label for="emailAddress" class="block text-sm font-medium text-gray-700">
+									<label for="email" class="block text-sm font-medium text-gray-700">
 										Email address
 									</label>
 									<input
 										type="text"
-										name="emailAddress"
-										id="emailAddress"
+										name="email"
+										id="email"
 										autocomplete="email"
 										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										onChange={changeFormValues}
@@ -95,8 +118,9 @@ function AddOffice() {
 										id="country"
 										name="country"
 										autocomplete="country"
-										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-										onChange={changeFormValues}
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										onChange={changeFormValues}>
+										<option hidden>Select Country</option>
 										<option>Bulgaria</option>
 									</select>
 								</div>
@@ -113,46 +137,34 @@ function AddOffice() {
 										onChange={changeFormValues}
 									/>
 								</div>
-
-								<div class="col-span-6 sm:col-span-3 lg:col-span-3">
-									<label for="state" class="block text-sm font-medium text-gray-700">
-										State / Province
-									</label>
-									<input
-										type="text"
-										name="state"
-										id="state"
-										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-										onChange={changeFormValues}
-									/>
-								</div>
-
-								<div class="col-span-6 sm:col-span-3 lg:col-span-3">
-									<label for="postalCode" class="block text-sm font-medium text-gray-700">
-										ZIP / Postal
-									</label>
-									<input
-										type="text"
-										name="postalCode"
-										id="postalCode"
-										autocomplete="postal-code"
-										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-										onChange={changeFormValues}
-									/>
-								</div>
 								
 								<div class="col-span-6">
-									<label for="streetAddress" class="block text-sm font-medium text-gray-700">
-										Street address
+									<label for="address" class="block text-sm font-medium text-gray-700">
+										Address
 									</label>
 									<input
 										type="text"
-										name="streetAddress"
-										id="streetAddress"
+										name="address"
+										id="address"
 										autocomplete="street-address"
 										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										onChange={changeFormValues}
 									/>
+								</div>
+
+								<div class="col-span-6">
+									<label for="company" class="block text-sm font-medium text-gray-700">
+										Company
+									</label>
+									<select
+										id="company"
+										name="company"
+										autocomplete="company"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										onChange={changeFormValues}>
+										<option hidden>Select Company</option>
+										{allCompanies}
+									</select>
 								</div>
 								
 							</div>

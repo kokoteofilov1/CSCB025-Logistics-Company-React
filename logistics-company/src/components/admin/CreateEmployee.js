@@ -1,14 +1,32 @@
 import { React, useEffect, useState } from "react";
 import { addEmployee } from "../../api";
+import { getOffices } from "../../api";
 
 function CreateEmployee() {
+    const [offices, setOffices] = useState([]);
+
     const formFieldsInitalState = {
-        firstName: '',
-        lastName: '',
+        username: '',
+        password: '',
         email: '',
-        position: '',
-        phoneNumber: ''
+        roles: '',
+        office: ''
     }
+
+    useEffect(() => {
+        const getAllOffices = async() => {
+			const res = await getOffices();
+			setOffices(res.data);
+			console.log(res.data)
+		}
+		getAllOffices();
+    }, []);
+
+    const allOffices = offices.length > 0 && offices.map((office) => {
+        return (
+            <option>{office.address}</option>
+        );
+    });
 
     const [formFields, setFormFields] = useState(formFieldsInitalState);
 
@@ -23,14 +41,15 @@ function CreateEmployee() {
         event.preventDefault();
 
         try {
+            const officeObject = offices.find(obj => obj.address === formFields.office);
+
             const body = JSON.stringify({
-                ...formFields
+                ...formFields,
+                office: {id: officeObject.id, city: officeObject.city, address: officeObject.address, company: officeObject.company},
+                roles: [formFields.roles]
             });
-
-            await addEmployee(body);
-
             console.log(body);
-
+            await addEmployee(body);
             setFormFields(formFieldsInitalState);
         } catch (error) {
             console.log(error);
@@ -46,29 +65,30 @@ function CreateEmployee() {
                             <div class="grid grid-cols-6 gap-6">
 
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="firstName" class="block text-sm font-medium text-gray-700">
-                                        First Name
+                                    <label for="username" class="block text-sm font-medium text-gray-700">
+                                        username
                                     </label>
                                     <input 
-                                    value={formFields.firstName} 
+                                    value={formFields.username} 
                                     onChange={formValues} 
                                     type="text" 
-                                    name="firstName" 
-                                    id="firstName" 
+                                    name="username" 
+                                    id="username" 
                                     autocomplete="given-name" 
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="lastName" class="block text-sm font-medium text-gray-700">
-                                        Last Name
+                                    <label for="password" class="block text-sm font-medium text-gray-700">
+                                        password
                                     </label>
                                     <input 
-                                    value={formFields.lastName} 
+                                    value={formFields.password} 
                                     onChange={formValues} 
                                     type="text" 
-                                    name="lastName" 
-                                    id="lastName" 
+                                    name="password" 
+                                    id="password" 
+                                    autocomplete="given-name" 
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                                 </div>
 
@@ -99,19 +119,34 @@ function CreateEmployee() {
                                 </div>
 
                                 <div class="col-span-6">
-                                    <label for="position" class="block text-sm font-medium text-gray-700">
-                                        Select a position
+                                    <label for="roles" class="block text-sm font-medium text-gray-700">
+                                        Select a role
                                     </label>
                                     <select 
                                     onChange={formValues} 
-                                    id="position" 
-                                    name="position" 
+                                    id="roles" 
+                                    name="roles" 
                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <option hidden>Select a position</option>
-                                        <option>office employee</option>
-                                        <option>courier</option>
+                                        <option hidden>Select a role</option>
+                                        <option>ROLE_OFFICE</option>
+                                        <option>ROLE_COURIER</option>
                                     </select>
                                 </div>
+
+                                <div class="col-span-6">
+									<label for="office" class="block text-sm font-medium text-gray-700">
+										Office
+									</label>
+									<select
+										id="office"
+										name="office"
+										autocomplete="office"
+										class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+										onChange={formValues}>
+										<option hidden>Select Office</option>
+										{allOffices}
+									</select>
+								</div>
                             </div>
                         </div>
                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

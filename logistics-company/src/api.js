@@ -30,6 +30,25 @@ export const signIn = (body) => {
 		});
 };
 
+export const getCompanies = () => {
+	return axios.get(`${domain}/company`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	});
+};
+
+export const getOffices = () => {
+	return axios.get(`${domain}/office`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	});
+};
+
+
 export const addOffice = (body) => {
 	return axios.post(`${domain}/office`, body, {
 		headers: {
@@ -41,6 +60,15 @@ export const addOffice = (body) => {
 
 export const addEmployee = (body) => {
 	return axios.post(`${domain}/user`, body, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	});
+};
+
+export const addCompany = (body) => {
+	return axios.post(`${domain}/company`, body, {
 		headers: {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')

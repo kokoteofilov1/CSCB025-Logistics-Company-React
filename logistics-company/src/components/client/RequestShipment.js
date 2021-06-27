@@ -1,16 +1,16 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 import NavBar from '../NavBar';
+import { getOffices, getUser, createShipment, getUserByUsername } from "../../api";
 
 function RequestShipment() {
+	const [offices, setOffices] = useState([]);
+	const [sender, setSender] = useState({});
+
 	const formFieldsInitalState = {
-		recipientFirstName: '',
-		recipientLastName: '',
-		option: '',
+		recivier: '',
 		address: '',
-		office: '',
-		packageWeight: '',
-		phoneNumber: '',
+		weight: ''
 	};
 
 	const [formFields, setFormFields] = useState(formFieldsInitalState);
@@ -22,15 +22,43 @@ function RequestShipment() {
 		});
 	};
 
-	const submitEmployee = async (event) => {
-		event.preventDefault();
+	useEffect(() => {
+        const getAllOffices = async() => {
+			const res = await getOffices();
+			setOffices(res.data);
+			console.log(res.data);
+		}
 
+		const getSender = async() => {
+			const senderObj = await getUser(localStorage.getItem('id'));
+			setSender(senderObj.data);
+			console.log(senderObj.data);
+		}
+
+		getAllOffices();
+		getSender();
+    }, []);
+
+	const allOffices = offices.length > 0 && offices.map((office) => {
+        return (
+            <option>{office.address}</option>
+        );
+    });
+
+	const submitShipment = async (event) => {
+		event.preventDefault();
 		try {
 			const body = JSON.stringify({
-				...formFields,
+				shipment: {
+					address: formFields.address,
+					weight: formFields.weight
+				},
+				sender: sender,
+				recivier: await (await getUserByUsername(formFields.recivier)).data,
 			});
-
 			console.log(body);
+
+			await createShipment(body);
 
 			setFormFields(formFieldsInitalState);
 		} catch (error) {
@@ -46,9 +74,9 @@ function RequestShipment() {
 			<input
 				value={formFields.address}
 				onChange={formValues}
-				type="email"
-				name="email"
-				id="email"
+				type="text"
+				name="address"
+				id="address"
 				class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 			/>
 		</div>
@@ -56,16 +84,16 @@ function RequestShipment() {
 
 	let officesDropdown = (
 		<div class="col-span-6">
-			<label for="office" class="block text-sm font-medium text-gray-700">
+			<label for="address" class="block text-sm font-medium text-gray-700">
 				Choose an office for your delivery
 			</label>
 			<select
 				onChange={formValues}
-				id="office"
-				name="office"
+				id="address"
+				name="address"
 				class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
 				<option hidden>Choose an office</option>
-				<option>All offices will be displayed here</option>
+				{allOffices}
 			</select>
 		</div>
 	);
@@ -76,49 +104,35 @@ function RequestShipment() {
 
 			<div class="flex justify-center my-10">
 				<div class="mt-5 md:mt-0 md:col-span-2">
-					<form action="#" method="POST" onSubmit={submitEmployee}>
+					<form action="#" method="POST" onSubmit={submitShipment}>
 						<div class="shadow overflow-hidden sm:rounded-md">
 							<div class="px-4 py-5 bg-white sm:p-6">
 								<div class="grid grid-cols-6 gap-6">
 									<div class="col-span-6 sm:col-span-3">
-										<label for="firstName" class="block text-sm font-medium text-gray-700">
-											Recipient First Name
+										<label for="recivier" class="block text-sm font-medium text-gray-700">
+											Recipient Username
 										</label>
 										<input
-											value={formFields.firstName}
+											value={formFields.recivier}
 											onChange={formValues}
 											type="text"
-											name="firstName"
-											id="firstName"
+											name="recivier"
+											id="recivier"
 											autocomplete="given-name"
 											class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>
 									</div>
 
 									<div class="col-span-6 sm:col-span-3">
-										<label for="lastName" class="block text-sm font-medium text-gray-700">
-											Recipient Last Name
-										</label>
-										<input
-											value={formFields.lastName}
-											onChange={formValues}
-											type="text"
-											name="lastName"
-											id="lastName"
-											class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-										/>
-									</div>
-
-									<div class="col-span-6 sm:col-span-3">
-										<label for="packageWeight" class="block text-sm font-medium text-gray-700">
+										<label for="weight" class="block text-sm font-medium text-gray-700">
 											Package Weight
 										</label>
 										<input
-											value={formFields.packageWeight}
+											value={formFields.weight}
 											onChange={formValues}
 											type="number"
-											name="packageWeight"
-											id="packageWeight"
+											name="weight"
+											id="weight"
 											class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>
 									</div>
@@ -140,20 +154,6 @@ function RequestShipment() {
 
 									{formFields.option === 'to an address' && addressField}
 									{formFields.option === 'to an office' && officesDropdown}
-
-									<div class="col-span-6">
-										<label for="phomeNumber" class="block text-sm font-medium text-gray-700">
-											Recipient Phone Number
-										</label>
-										<input
-											value={formFields.phoneNumber}
-											onChange={formValues}
-											type="tel"
-											name="phoneNumber"
-											id="phoneNumber"
-											class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-										/>
-									</div>
 								</div>
 							</div>
 							<div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

@@ -111,6 +111,15 @@ export const getUser = (id) => {
 	})
 }
 
+export const getUserByUsername = (username) => {
+	return axios.get(`${domain}/user/username?username=${username}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+}
+
 export const editUser = (body) => {
 	return axios.put(`${domain}/user/${localStorage.getItem('id')}`, body, {
 		headers:{
@@ -122,6 +131,15 @@ export const editUser = (body) => {
 
 export const getShipments = () => {
 	return axios.get(`${domain}/shipment`, {
+		headers:{
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+}
+
+export const createShipment = (body) => {
+	return axios.post(`${domain}/shipment`, body, {
 		headers:{
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')

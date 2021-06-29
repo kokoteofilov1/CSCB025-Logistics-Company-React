@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import NavBar from './NavBar';
 import CreateEmployee from './admin/CreateEmployee';
 import AddOffice from './admin/AddOffice';
+import DisplayShipments from './DisplayShipments';
 
 import jwt_decode from 'jwt-decode';
 
@@ -31,8 +32,7 @@ function Home() {
 		<div>
 			<NavBar />
 			<div className="flex justify-center my-10">
-				<CreateEmployee />
-				<AddOffice />
+				<DisplayShipments/>
 			</div>
 		</div>
 	);

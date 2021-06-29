@@ -39,14 +39,35 @@ export const getCompanies = () => {
 	});
 };
 
+<<<<<<< Updated upstream
+=======
+export const getOffices = () => {
+	return axios.get(`${domain}/office`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	});
+};
+
+>>>>>>> Stashed changes
 export const getUsers = () => {
 	return axios.get(`${domain}/user`, {
 		headers: {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
 		}
-	})
-}
+	});
+};
+
+export const getShipments = () => {
+	return axios.get(`${domain}/shipment`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	});
+};
 
 export const addOffice = (body) => {
 	return axios.post(`${domain}/office`, body, {
@@ -59,6 +80,15 @@ export const addOffice = (body) => {
 
 export const deleteOffice = (body) => {
 	return axios.delete(`${domain}/office/${body.id}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+		}
+	})
+};
+
+export const deleteShipment = (body) => {
+	return axios.delete(`${domain}/shipment/${body.id}`, {
 		headers: {
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
@@ -128,15 +158,6 @@ export const editUser = (body) => {
 		}
 	})
 };
-
-export const getShipments = () => {
-	return axios.get(`${domain}/shipment`, {
-		headers:{
-			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
-}
 
 export const createShipment = (body) => {
 	return axios.post(`${domain}/shipment`, body, {

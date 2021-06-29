@@ -18,6 +18,17 @@ function NavBar() {
 		);
 	};
 
+	const ReviewShipmentsButton = () => {
+		console.log('admin panel button initialized');
+		return (
+			<Link
+				to={'/ReviewShipments'}
+				className="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 hover:text-white hover:bg-gray-700">
+				Review Shipments
+			</Link>
+		);
+	};
+
 	return (
 		<div>
 			<nav className="bg-gray-800">
@@ -45,6 +56,7 @@ function NavBar() {
 										EditProfile
 									</Link>
 									{localStorage.getItem('roles').includes("ROLE_ADMIN") ? AdminPanelButton() : null}
+									{localStorage.getItem('roles').includes("ROLE_OFFICE") ? ReviewShipmentsButton() : null}
 								</div>
 							</div>
 						</div>

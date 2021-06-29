@@ -1,14 +1,14 @@
 import { React, useState, useEffect } from 'react';
 
 import NavBar from '../NavBar';
-import { getOffices, getUser, createShipment, getUserByUsername } from "../../api";
+import { getOffices, getUser, createShipment } from "../../api";
 
 function RequestShipment() {
 	const [offices, setOffices] = useState([]);
 	const [sender, setSender] = useState({});
 
 	const formFieldsInitalState = {
-		recivier: '',
+		receiver: '',
 		address: '',
 		weight: ''
 	};
@@ -23,13 +23,13 @@ function RequestShipment() {
 	};
 
 	useEffect(() => {
-        const getAllOffices = async() => {
+		const getAllOffices = async () => {
 			const res = await getOffices();
 			setOffices(res.data);
 			console.log(res.data);
 		}
 
-		const getSender = async() => {
+		const getSender = async () => {
 			const senderObj = await getUser(localStorage.getItem('id'));
 			setSender(senderObj.data);
 			console.log(senderObj.data);
@@ -37,24 +37,21 @@ function RequestShipment() {
 
 		getAllOffices();
 		getSender();
-    }, []);
+	}, []);
 
 	const allOffices = offices.length > 0 && offices.map((office) => {
-        return (
-            <option>{office.address}</option>
-        );
-    });
+		return (
+			<option>{office.address}</option>
+		);
+	});
 
 	const submitShipment = async (event) => {
 		event.preventDefault();
 		try {
 			const body = JSON.stringify({
-				shipment: {
-					address: formFields.address,
-					weight: formFields.weight
-				},
-				sender: sender,
-				recivier: await (await getUserByUsername(formFields.recivier)).data,
+				target: formFields.recеiver,
+				address: formFields.address,
+				weight: formFields.weight
 			});
 			console.log(body);
 
@@ -109,15 +106,15 @@ function RequestShipment() {
 							<div class="px-4 py-5 bg-white sm:p-6">
 								<div class="grid grid-cols-6 gap-6">
 									<div class="col-span-6 sm:col-span-3">
-										<label for="recivier" class="block text-sm font-medium text-gray-700">
+										<label for="recеiver" class="block text-sm font-medium text-gray-700">
 											Recipient Username
 										</label>
 										<input
-											value={formFields.recivier}
+											value={formFields.recеiver}
 											onChange={formValues}
 											type="text"
-											name="recivier"
-											id="recivier"
+											name="recеiver"
+											id="recеiver"
 											autocomplete="given-name"
 											class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										/>

@@ -29,12 +29,14 @@ function Home() {
 	let history = useHistory();
 
 	return (
-		<div>
-			<NavBar />
-			<div className="flex justify-center my-10">
-				<DisplayShipments/>
+		localStorage.getItem('accessToken') !== null && (
+			<div>
+				<NavBar />
+				<div className="flex justify-center my-10">
+					<DisplayShipments />
+				</div>
 			</div>
-		</div>
+		)
 	);
 }
 

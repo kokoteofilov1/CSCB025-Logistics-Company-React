@@ -43,8 +43,8 @@ export const getUsers = () => {
 	return axios.get(`${domain}/user`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
 	});
 };
 
@@ -52,8 +52,8 @@ export const getShipments = () => {
 	return axios.get(`${domain}/shipment`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
 	});
 };
 
@@ -79,9 +79,9 @@ export const deleteShipment = (body) => {
 	return axios.delete(`${domain}/shipment/${body.id}`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
 };
 
 export const deleteUser = (body) => {
@@ -159,7 +159,6 @@ export const createShipment = (body) => {
 export const registerShipment = (id) => {
 	return axios.patch(`${domain}/shipment/register/${id}`, {
 		headers: {
-			'Content-Type': 'application/json',
 			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
 		},
 	});

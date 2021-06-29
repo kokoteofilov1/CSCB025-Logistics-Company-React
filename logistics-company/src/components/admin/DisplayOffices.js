@@ -17,7 +17,7 @@ function DisplayOffice() {
 
 	const handleDelete = async (office) => {
 		await deleteOffice(office);	
-		setOffices(offices.filter((item) => item._id !== office._id));
+		setOffices(offices.filter((item) => item.id !== office.id));
 	};
 
 	return (

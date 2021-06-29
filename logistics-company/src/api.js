@@ -15,10 +15,10 @@ export const signIn = (body) => {
 		.post(`${domain}/auth/signin`, body, {
 			headers: {
 				'Content-Type': 'application/json',
-			}
+			},
 		})
 		.then((response) => {
-			console.log(response.data)
+			console.log(response.data);
 			let token = response.data.accessToken;
 			localStorage.setItem('accessToken', token);
 			localStorage.setItem('userEmail', response.data.email);
@@ -34,8 +34,8 @@ export const getCompanies = () => {
 	return axios.get(`${domain}/company`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
 	});
 };
 
@@ -73,8 +73,8 @@ export const addOffice = (body) => {
 	return axios.post(`${domain}/office`, body, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
 	});
 };
 
@@ -82,9 +82,9 @@ export const deleteOffice = (body) => {
 	return axios.delete(`${domain}/office/${body.id}`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
 };
 
 export const deleteShipment = (body) => {
@@ -100,26 +100,26 @@ export const deleteUser = (body) => {
 	return axios.delete(`${domain}/user/${body.id}`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
-}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
 
 export const getOffices = () => {
 	return axios.get(`${domain}/office`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
-}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
 
 export const addEmployee = (body) => {
 	return axios.post(`${domain}/user`, body, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
 	});
 };
 
@@ -127,8 +127,8 @@ export const addCompany = (body) => {
 	return axios.post(`${domain}/company`, body, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
 	});
 };
 
@@ -136,34 +136,43 @@ export const getUser = (id) => {
 	return axios.get(`${domain}/user/${id}`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
-}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
 
 export const getUserByUsername = (username) => {
 	return axios.get(`${domain}/user/username?username=${username}`, {
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
-}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
 
 export const editUser = (body) => {
 	return axios.put(`${domain}/user/${localStorage.getItem('id')}`, body, {
-		headers:{
+		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
 };
 
 export const createShipment = (body) => {
 	return axios.post(`${domain}/shipment`, body, {
-		headers:{
+		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-		}
-	})
-}
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
+
+export const registerShipment = (id) => {
+	return axios.patch(`${domain}/shipment/register/${id}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};

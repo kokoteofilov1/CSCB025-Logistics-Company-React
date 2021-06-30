@@ -49,9 +49,14 @@ function RequestShipment() {
 		event.preventDefault();
 		try {
 			const body = JSON.stringify({
+				id: null,
+				sender: null,
 				target: formFields.recеiver,
 				address: formFields.address,
-				weight: formFields.weight
+				weight: formFields.weight,
+				employee: null,
+				registeredStatus: null,
+				deliveredStatus: null
 			});
 			console.log(body);
 

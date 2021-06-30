@@ -3,28 +3,20 @@ import { Link } from 'react-router-dom';
 
 import { getShipments, deleteShipment, registerShipment } from '../api';
 
-function DisplayShipments() {
+function DisplayShipments(props) {
 	const [shipments, setShipments] = useState([]);
 
 	useEffect(() => {
-		const getItems = async () => {
-			const items = await getShipments();
-			setShipments(items.data);
-			console.log(shipments);
-			console.log(items.data);
-		};
-		getItems();
-	}, []);
-
-	const IDCol = () => {
-		return (
-			<th
-				scope="col"
-				className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				ID
-			</th>
-		);
-	};
+		console.log(props);
+		//setShipments(props.shipments)
+		// const getItems = async () => {
+		// 	const items = await getShipments();
+		// 	setShipments(items.data);
+		// 	console.log(shipments);
+		// 	console.log(items.data);
+		// };
+		// getItems();
+	}, [props]);
 
 	const editButton = (shipment) => {
 		return (
@@ -47,16 +39,8 @@ function DisplayShipments() {
 					onClick={async () => {
 						await registerShipment(shipment.id);
 					}}>
-					Approve
+					{shipment.registeredStatus ? "Approved" : "Approve"}
 				</button>
-			</td>
-		);
-	};
-
-	const IDField = (shipment) => {
-		return (
-			<td className="px-6 py-4 whitespace-nowrap">
-				<div className="text-sm text-gray-900">{shipment.id}</div>
 			</td>
 		);
 	};
@@ -108,7 +92,7 @@ function DisplayShipments() {
 								</tr>
 							</thead>
 							<tbody className="bg-white divide-y divide-gray-200">
-								{shipments.map((shipment) => (
+								{props && props.shipments.map((shipment) => (
 									<tr key={shipment.id}>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm text-gray-900">{shipment.id}</div>

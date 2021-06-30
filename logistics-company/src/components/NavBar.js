@@ -1,11 +1,8 @@
-import { React, useContext } from 'react';
+import { React } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-
-import { AuthContext } from '../AuthContext';
 
 function NavBar() {
 	const history = useHistory();
-	const isAuthenticated = useContext(AuthContext);
 
 	const AdminPanelButton = () => {
 		console.log('admin panel button initialized');
@@ -19,7 +16,7 @@ function NavBar() {
 	};
 
 	const ReviewShipmentsButton = () => {
-		console.log('admin panel button initialized');
+		console.log('review shipments button initialized');
 		return (
 			<Link
 				to={'/ReviewShipments'}

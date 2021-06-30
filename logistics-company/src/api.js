@@ -157,8 +157,17 @@ export const createShipment = (body) => {
 };
 
 export const registerShipment = (id) => {
-	return axios.patch(`${domain}/shipment/register/${id}`, {
+	return axios.patch(`${domain}/shipment/register/${id}`, null, {
 		headers: {
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
+
+export const getRegisteredShipments = () => {
+	return axios.get(`${domain}/reports/shipment/registered`, {
+		headers: {
+			'Content-Type': 'application/json',
 			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
 		},
 	});

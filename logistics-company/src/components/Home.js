@@ -1,9 +1,8 @@
-import { isValidElement, React, useEffect, useState } from 'react';
+import { React, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from './NavBar';
-import CreateEmployee from './admin/CreateEmployee';
-import AddOffice from './admin/AddOffice';
-import DisplayShipments from './DisplayShipments';
+import ForEmployees from './reports/ForEmployees';
+import ForCustomers from './reports/ForCustomers';
 
 import jwt_decode from 'jwt-decode';
 
@@ -33,7 +32,7 @@ function Home() {
 			<div>
 				<NavBar />
 				<div className="flex justify-center my-10">
-					<DisplayShipments />
+					{localStorage.getItem('roles').includes("ROLE_ADMIN") || localStorage.getItem('roles').includes("ROLE_OFFICE") ? <ForEmployees/> : <ForCustomers/>}
 				</div>
 			</div>
 		)

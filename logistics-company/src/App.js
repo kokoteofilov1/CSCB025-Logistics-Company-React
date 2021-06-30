@@ -10,6 +10,7 @@ import { AuthContext } from './AuthContext';
 import RequestShipment from './components/client/RequestShipment';
 import EditProfile from './components/client/EditProfile';
 import DisplayOffices from './components/admin/DisplayOffices';
+import ReviewShipments from './components/employee/ReviewShipments';
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -28,6 +29,7 @@ function App() {
 					<Route path={'/SignIn'} component={SignIn} />
 					<Route path={'/AddOffice'} component={AddOffice} />
 					<Route path={'/AdminPanel'} component={AdminPanel} />
+					<Route path={'/ReviewShipments'} component={ReviewShipments} />
 					<Route exact path={'/'} component={Home} />
 					<Route path={'/RequestShipment'} component={RequestShipment} /> 
 					<Route path={'/EditProfile'} component={EditProfile} /> 

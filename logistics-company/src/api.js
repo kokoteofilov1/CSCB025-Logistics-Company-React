@@ -173,7 +173,7 @@ export const getRegisteredShipments = () => {
 	});
 };
 
-export const getRegisteredShipmentsByUsers = (username) => {
+export const getRegisteredShipmentsByUser = (username) => {
 	return axios.get(`${domain}/reports/shipment/registeredByUser/${username}`, {
 		headers: {
 			'Content-Type': 'application/json',

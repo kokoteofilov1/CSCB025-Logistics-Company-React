@@ -10,6 +10,7 @@ function DisplayShipments() {
 		const getItems = async () => {
 			const items = await getShipments();
 			setShipments(items.data);
+			console.log(shipments);
 			console.log(items.data);
 		};
 		getItems();
@@ -73,7 +74,11 @@ function DisplayShipments() {
 						<table className="min-w-full divide-y divide-gray-200">
 							<thead>
 								<tr>
-									{localStorage.getItem('roles').includes('ROLE_OFFICE') ? IDCol() : null}
+									<th
+										scope="col"
+										className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+										ID
+									</th>
 									<th
 										scope="col"
 										className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -104,10 +109,10 @@ function DisplayShipments() {
 							</thead>
 							<tbody className="bg-white divide-y divide-gray-200">
 								{shipments.map((shipment) => (
-									<tr key={shipment._id}>
-										{localStorage.getItem('roles').includes('ROLE_OFFICE')
-											? IDField(shipment)
-											: null}
+									<tr key={shipment.id}>
+										<td className="px-6 py-4 whitespace-nowrap">
+											<div className="text-sm text-gray-900">{shipment.id}</div>
+										</td>
 										<td className="px-6 py-4 whitespace-nowrap">
 											<div className="text-sm text-gray-900">{shipment.sender.username}</div>
 										</td>

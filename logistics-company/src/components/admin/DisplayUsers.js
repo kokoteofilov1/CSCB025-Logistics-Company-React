@@ -17,7 +17,7 @@ function DisplayUsers() {
 
 	const handleDelete = async (user) => {
 		await deleteUser(user);	
-		setUsers(users.filter((item) => item._id !== user._id));
+		setUsers(users.filter((item) => item.id !== user.id));
 	};
 
 	return (
@@ -83,7 +83,7 @@ function DisplayUsers() {
 												<Link
 													to={{
 														pathname: '/Edit',
-														state: { _id: user._id, title: user.username },
+														state: { id: user.id, title: user.username },
 													}}>
 													Edit
 												</Link>

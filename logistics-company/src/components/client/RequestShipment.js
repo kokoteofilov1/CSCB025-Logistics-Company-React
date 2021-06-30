@@ -56,7 +56,8 @@ function RequestShipment() {
 				weight: formFields.weight,
 				employee: null,
 				registeredStatus: null,
-				deliveredStatus: null
+				deliveredStatus: null,
+				toOffice: formFields.option === "to an office"
 			});
 			console.log(body);
 

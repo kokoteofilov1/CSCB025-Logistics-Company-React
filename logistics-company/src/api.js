@@ -172,3 +172,39 @@ export const getRegisteredShipments = () => {
 		},
 	});
 };
+
+export const getRegisteredShipmentsByUsers = (username) => {
+	return axios.get(`${domain}/reports/shipment/registeredByUser/${username}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
+
+export const getRegisteredShipmentsNotDelivered = () => {
+	return axios.get(`${domain}/reports/shipment/registeredNotDelivered`, {
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
+
+export const getShipmentsSentByUser = (username) => {
+	return axios.get(`${domain}/reports/shipment/sentByUser/${username}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};
+
+export const getShipmentsReceivedByUser = (username) => {
+	return axios.get(`${domain}/reports/shipment/receivedByUser/${username}`, {
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+		},
+	});
+};

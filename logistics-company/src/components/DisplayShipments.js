@@ -83,6 +83,11 @@ function DisplayShipments(props) {
 										className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 										Weight
 									</th>
+									<th
+										scope="col"
+										className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+										Price
+									</th>
 									<th scope="col" className="px-6 py-3 bg-gray-50">
 										<span className="sr-only">Edit</span>
 									</th>
@@ -111,7 +116,12 @@ function DisplayShipments(props) {
 												{Math.round(shipment.weight * 10) / 10}
 											</div>
 										</td>
-										{localStorage.getItem('roles').includes('ROLE_OFFICE')
+										<td className="px-6 py-4 whitespace-nowrap">
+											<div className="text-sm text-gray-900">
+												{shipment.price}
+											</div>
+										</td>
+										{localStorage.getItem('roles').includes('ROLE_OFFICE') || localStorage.getItem('roles').includes('ROLE_ADMIN')
 											? approveButton(shipment)
 											: editButton(shipment)}
 										<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

@@ -67,6 +67,7 @@ function ForEmployees() {
                     Registered Shipments
                 </button>
 
+                <div>
                 <div class="col-span-6 sm:col-span-3">
                     <label for="registeredByUser" class="block text-sm font-medium text-gray-700">
                         Registered by (username)
@@ -85,11 +86,13 @@ function ForEmployees() {
                 <button onClick={RegisteredByEmployee} className="inline-flex items-center justify-center px-5 py-3 border border-1px text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 mx-4">
                     Registered By Employee
                 </button>
+                </div>
 
                 <button onClick={RegisteredButNotDelivered} className="inline-flex items-center justify-center px-5 py-3 border border-1px text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 mx-4">
                     Registered But Not Delivered
                 </button>
 
+                <div>
                 <div class="col-span-6 sm:col-span-3">
                     <label for="sentByUser" class="block text-sm font-medium text-gray-700">
                         Sent by (username)
@@ -108,7 +111,9 @@ function ForEmployees() {
                 <button onClick={SentByUser} className="inline-flex items-center justify-center px-5 py-3 border border-1px text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 mx-4">
                     Sent By User
                 </button>
+                </div>
 
+                <div class="ml-4">
                 <div class="col-span-6 sm:col-span-3">
                     <label for="sentBreceivedByUseryUser" class="block text-sm font-medium text-gray-700">
                         Received by (username)
@@ -127,6 +132,7 @@ function ForEmployees() {
                 <button onClick={ReceivedByUser} className="inline-flex items-center justify-center px-5 py-3 border border-1px text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 mx-4">
                     Received By User
                 </button>
+                </div>
             </div>
 
             {shipments !== null && <div className="flex justify-center my-10">
